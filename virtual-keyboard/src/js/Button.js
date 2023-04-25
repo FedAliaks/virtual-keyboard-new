@@ -15,7 +15,7 @@ export class Button {
       div.classList.add('button-space');
     }
 
-    const text = this.innerTextButton === "Space" ? '' : `${this.innerTextButton}`;
+    const text = this.innerTextButton /* === "Space" ? '' : `${this.innerTextButton}`; */
 
     div.innerText = text;
 
