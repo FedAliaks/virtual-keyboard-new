@@ -2,7 +2,8 @@ import { Button } from './Button';
 
 
 function createKeyboardLines(language) {
-  const KEYBOARD_SECTION = document.querySelector('.keyboard')
+  const KEYBOARD_SECTION = document.querySelector('.keyboard');
+  KEYBOARD_SECTION.innerHTML = '';
 
   language.forEach(keyboardLine => {
     let line = document.createElement('div');

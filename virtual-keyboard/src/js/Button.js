@@ -1,3 +1,7 @@
+import { sizeLetter } from "../index";
+
+
+
 export class Button {
   constructor(symbol) {
     this.innerTextButton = symbol;
@@ -13,6 +17,10 @@ export class Button {
     if(this.innerTextButton === 'Space') {
       div.classList.remove('button-dark');
       div.classList.add('button-space');
+    }
+
+    if(this.innerTextButton === 'Caps Lock' && sizeLetter === 'big') {
+      div.classList.add('button_active');
     }
 
     const text = this.innerTextButton /* === "Space" ? '' : `${this.innerTextButton}`; */

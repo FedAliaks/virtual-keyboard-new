@@ -7,6 +7,7 @@ import { createPage } from './js/createPage';
 const img = require('./assets/imageSea.jpg');
 
 let langKeyboard = 'EN';
+let sizeLetter = 'small';
 
 
 createPage();
@@ -15,8 +16,13 @@ createPage();
 
 const KEYBOARD = document.querySelector('.keyboard');
 KEYBOARD.addEventListener('mousedown', (e) => {
+  const target = e.target;
   addInteractiveForButton(e);
   addLetterInTextareaField(e.target.innerText);
+
+  console.log(123);
+  
+  
 })
 
 KEYBOARD.addEventListener('mouseup', (e) => {
@@ -43,7 +49,7 @@ function addLetterInTextareaField(letter) {
   } else if(letter === 'Backspace') {
     content = content.slice(0, content.length - 1);
   } else if(letter === 'Caps Lock') {
-    //change Big or Small Letters
+      changeSizeButtonInKeyboard();
   } else if(letter === 'Enter') {
     //change Big or Small Letters
   } else if(letter === 'Shift') {
@@ -65,6 +71,19 @@ function addLetterInTextareaField(letter) {
 
 
 function changeSizeButtonInKeyboard() {
+  console.log('hello');
+  let alphabet = '';
+  if(langKeyboard === 'EN') {
+    sizeLetter === 'small' ? alphabet = KEYBOARD_EN_SHIFT : alphabet = KEYBOARD_EN;
+  } else {
+    sizeLetter === 'small' ? alphabet = KEYBOARD_RU_SHIFT : alphabet = KEYBOARD_RU;
+  }
+
+  sizeLetter === 'small' ? sizeLetter = 'big' : sizeLetter = 'small';
+  createKeyboardLines(alphabet);
+
+
+  
 
 }
 
@@ -79,7 +98,7 @@ function changeSizeButtonInKeyboard() {
 
 
 
-
+export { sizeLetter }
 
 
 
