@@ -19,7 +19,7 @@ export class Button {
       div.classList.add('button-space');
     }
 
-    if(this.innerTextButton === 'Caps Lock' && sizeLetter === 'big' && btnText === 'Caps Lock') {
+    if(this.innerTextButton === 'CapsLock' && sizeLetter === 'big' && btnText === 'CapsLock') {
       div.classList.add('button_active');
     }
 

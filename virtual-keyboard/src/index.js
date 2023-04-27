@@ -35,7 +35,7 @@ KEYBOARD.addEventListener('mouseup', (e) => {
   const targetContent = e.target.innerText;
 
 
-  if(targetContent !== "Caps Lock") {
+  if(targetContent !== "CapsLock") {
     addInteractiveForButton(e);
   }
 
@@ -50,7 +50,7 @@ KEYBOARD.addEventListener('mouseup', (e) => {
 
 function addInteractiveForButton(e) {
   const target = e.target;
-  console.log(123)
+
   if(target.classList.contains('button')) {
     target.classList.toggle('button_active');
   }
@@ -66,9 +66,10 @@ function addLetterInTextareaField(letter) {
     addSymbolInTextarea  = '    ';
   } else if(letter === 'Backspace') {
     content = content.slice(0, content.length - 1);
-  } else if(letter === 'Caps Lock') {
+  } else if(letter === 'CapsLock') {
       changeSizeButtonInKeyboard(letter);
   } else if(letter === 'Enter') {
+    addSymbolInTextarea = '\r\n';
     //change Big or Small Letters
   } else if(letter === 'Shift') {
     changeSizeButtonInKeyboard(letter);
@@ -81,6 +82,8 @@ function addLetterInTextareaField(letter) {
     //change Big or Small Letters
   } else if(letter === 'Space') {
     addSymbolInTextarea = ' ';
+  } else if(letter === "Del") {
+    deleteNextLetter();
   } else {
     addSymbolInTextarea = letter;
   }
@@ -103,6 +106,48 @@ function changeSizeButtonInKeyboard(btnText) {
 
 }
 
+function deleteNextLetter() {
+  console.log(123);
+
+}
+
+
+
+
+//keyboard event
+document.addEventListener('keydown', (e) => {
+  const btn = e.key;
+  addInteractiveAfterKeyboardPress(btn);
+  addLetterInTextareaField(btn);
+});
+
+document.addEventListener('keyup', (e) => {
+  const btn = e.key;
+
+  if(btn !== "CapsLock") {
+    addInteractiveAfterKeyboardPress(btn);
+  }
+
+  if(btn === 'Shift') {
+    changeSizeButtonInKeyboard(btn);
+  }
+  
+});
+
+
+function addInteractiveAfterKeyboardPress(button) {
+  console.log(1234);
+  const BUTTONS_ON_VIRTUAL_KEYBOARD = document.querySelectorAll('.button');
+
+  BUTTONS_ON_VIRTUAL_KEYBOARD.forEach(item => {
+    if(item.innerText === button) {
+      console.log(5)
+      item.classList.toggle('button_active');
+    }
+  })
+
+}
+
 
 
 
@@ -119,7 +164,7 @@ export { sizeLetter }
 
 
 
-/* const KEYBOARD = document.querySelector('.keyboard'); */
+
 
 
 
