@@ -15,24 +15,42 @@ createPage();
 
 
 const KEYBOARD = document.querySelector('.keyboard');
+
+
 KEYBOARD.addEventListener('mousedown', (e) => {
   const target = e.target;
-  addInteractiveForButton(e);
-  addLetterInTextareaField(e.target.innerText);
 
-  console.log(123);
-  
-  
+  if(e.target.classList.contains('button')) {
+    addInteractiveForButton(e);
+    addLetterInTextareaField(target.innerText);
+
+  }
+
+
+/*   console.log(123); */
+
 })
 
 KEYBOARD.addEventListener('mouseup', (e) => {
-  if(e.target.innerText !== "Caps Lock") {
+  const targetContent = e.target.innerText;
+
+
+  if(targetContent !== "Caps Lock") {
     addInteractiveForButton(e);
   }
+
+  if(targetContent === 'Shift') {
+    changeSizeButtonInKeyboard(targetContent);
+  }
+
+
+
+
 })
 
 function addInteractiveForButton(e) {
   const target = e.target;
+  console.log(123)
   if(target.classList.contains('button')) {
     target.classList.toggle('button_active');
   }
@@ -49,10 +67,11 @@ function addLetterInTextareaField(letter) {
   } else if(letter === 'Backspace') {
     content = content.slice(0, content.length - 1);
   } else if(letter === 'Caps Lock') {
-      changeSizeButtonInKeyboard();
+      changeSizeButtonInKeyboard(letter);
   } else if(letter === 'Enter') {
     //change Big or Small Letters
   } else if(letter === 'Shift') {
+    changeSizeButtonInKeyboard(letter);
     //change Big or Small Letters
   } else if(letter === 'Enter') {
     //change Big or Small Letters
@@ -70,7 +89,7 @@ function addLetterInTextareaField(letter) {
 }
 
 
-function changeSizeButtonInKeyboard() {
+function changeSizeButtonInKeyboard(btnText) {
   console.log('hello');
   let alphabet = '';
   if(langKeyboard === 'EN') {
@@ -80,10 +99,7 @@ function changeSizeButtonInKeyboard() {
   }
 
   sizeLetter === 'small' ? sizeLetter = 'big' : sizeLetter = 'small';
-  createKeyboardLines(alphabet);
-
-
-  
+  createKeyboardLines(alphabet, btnText);
 
 }
 

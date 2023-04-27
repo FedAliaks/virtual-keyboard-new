@@ -7,7 +7,7 @@ export class Button {
     this.innerTextButton = symbol;
   }
 
-  createButton(isFlag) {
+  createButton(btnText) {
     let div = document.createElement('div');
     div.className = 'button';
     if(this.innerTextButton.length > 1) {
@@ -19,7 +19,12 @@ export class Button {
       div.classList.add('button-space');
     }
 
-    if(this.innerTextButton === 'Caps Lock' && sizeLetter === 'big') {
+    if(this.innerTextButton === 'Caps Lock' && sizeLetter === 'big' && btnText === 'Caps Lock') {
+      div.classList.add('button_active');
+    }
+
+    if(this.innerTextButton === 'Shift' && sizeLetter === 'big' &&  btnText === 'Shift') {
+      console.log(123)
       div.classList.add('button_active');
     }
 
