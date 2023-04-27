@@ -68,13 +68,19 @@ function addLetterInTextareaField(letter) {
     content = content.slice(0, content.length - 1);
   } else if(letter === 'CapsLock') {
       changeSizeButtonInKeyboard(letter);
-  } else if(letter === 'Enter') {
+  } else if(letter === 'Control' 
+                || letter === 'Meta' 
+                || letter === 'Alt' 
+                || letter === 'ArrowUp' 
+                || letter === 'ArrowDown' 
+                || letter === 'ArrowLeft' 
+                || letter === 'ArrowRight') {
+
+  }else if(letter === 'Enter') {
     addSymbolInTextarea = '\r\n';
     //change Big or Small Letters
   } else if(letter === 'Shift') {
     changeSizeButtonInKeyboard(letter);
-    //change Big or Small Letters
-  } else if(letter === 'Enter') {
     //change Big or Small Letters
   } else if(letter === 'Ctrl') {
     //change Big or Small Letters
@@ -116,13 +122,15 @@ function deleteNextLetter() {
 
 //keyboard event
 document.addEventListener('keydown', (e) => {
-  const btn = e.key;
+  
+  const btn = e.key === 'Control' ? 'Ctrl' : e.key;
+  console.log(btn);
   addInteractiveAfterKeyboardPress(btn);
   addLetterInTextareaField(btn);
 });
 
 document.addEventListener('keyup', (e) => {
-  const btn = e.key;
+  const btn = e.key === 'Control' ? 'Ctrl' : e.key;
 
   if(btn !== "CapsLock") {
     addInteractiveAfterKeyboardPress(btn);
@@ -136,12 +144,12 @@ document.addEventListener('keyup', (e) => {
 
 
 function addInteractiveAfterKeyboardPress(button) {
-  console.log(1234);
+/*   console.log(1234); */
   const BUTTONS_ON_VIRTUAL_KEYBOARD = document.querySelectorAll('.button');
 
   BUTTONS_ON_VIRTUAL_KEYBOARD.forEach(item => {
     if(item.innerText === button) {
-      console.log(5)
+/*       console.log(5) */
       item.classList.toggle('button_active');
     }
   })
