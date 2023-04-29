@@ -24,7 +24,7 @@ export class Button {
     }
 
     if(this.innerTextButton === 'Shift' && sizeLetter === 'big' &&  btnText === 'Shift') {
-      console.log(123)
+/*       console.log(123) */
       div.classList.add('button_active');
     }
 

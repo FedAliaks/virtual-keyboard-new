@@ -14,6 +14,8 @@ createPage();
 
 
 
+
+
 const KEYBOARD = document.querySelector('.keyboard');
 
 
@@ -103,7 +105,7 @@ function addLetterInTextareaField(letter) {
 
 
 function changeSizeButtonInKeyboard(btnText) {
-  console.log('hello');
+/*   console.log('hello'); */
   let alphabet = '';
   if(langKeyboard === 'EN') {
     sizeLetter === 'small' ? alphabet = KEYBOARD_EN_SHIFT : alphabet = KEYBOARD_EN;
@@ -125,12 +127,26 @@ function deleteNextLetter() {
 
 
 //keyboard event
+
+const changeLanguage = ['Shift', 'Alt'];
+const pressed= new Set();
+
+
 document.addEventListener('keydown', (e) => {
+  pressed.add(e.key);
+/*   console.log('pressed');
+  console.log(pressed); */
   
   const btn = e.key === 'Control' ? 'Ctrl' : e.key;
-  console.log(btn);
+  console.log(btn)
   addInteractiveAfterKeyboardPress(btn);
   addLetterInTextareaField(btn);
+
+  checkChangeLanguage();
+
+
+
+
 });
 
 document.addEventListener('keyup', (e) => {
@@ -143,6 +159,9 @@ document.addEventListener('keyup', (e) => {
   if(btn === 'Shift') {
     changeSizeButtonInKeyboard(btn);
   }
+
+  pressed.delete(e.key);
+/*   console.log(pressed); */
   
 });
 
@@ -159,6 +178,55 @@ function addInteractiveAfterKeyboardPress(button) {
   })
 
 }
+
+
+function checkChangeLanguage() {
+  for(let pressKey of changeLanguage) {
+    if(!pressed.has(pressKey)) {
+      return;
+    }
+  }
+
+
+  langKeyboard === "EN" ? langKeyboard = 'RU' : langKeyboard = 'EN';
+
+}
+
+
+/* checkChangeLanguage();
+
+function checkChangeLanguage() {
+  console.log(123123);
+
+  const pressed = new Set();
+
+  document.querySelector('keydown', (e) => {
+    console.log(e.key);
+  })
+} */
+
+/* checkChangeLanguage();
+
+function checkChangeLanguage() {
+  console.log(9);
+  const pressed = new Set();
+  document.querySelector('keydown', (e) => {
+    pressed.add(e.key);
+
+    console.log(pressed);
+
+    for(let code of changeLanguage) {
+      if(!pressed.has(code)) {
+        return;
+      }
+    }
+    console.log('OK');
+  });
+
+  document.querySelector('keyup', (e) => {
+    pressed.delete(e.key);
+  })
+} */
 
 
 
