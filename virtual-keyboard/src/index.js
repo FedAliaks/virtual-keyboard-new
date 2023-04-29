@@ -68,15 +68,11 @@ function addLetterInTextareaField(letter) {
     content = content.slice(0, content.length - 1);
   } else if(letter === 'CapsLock') {
       changeSizeButtonInKeyboard(letter);
-  } else if(letter === 'Control' 
-                || letter === 'Meta' 
-                || letter === 'Alt' 
-                || letter === 'ArrowUp' 
-                || letter === 'ArrowDown' 
-                || letter === 'ArrowLeft' 
-                || letter === 'ArrowRight') {
+  } else if(letter === 'Control'
+                || letter === 'Meta'
+                || letter === 'Alt' ) {
 
-  }else if(letter === 'Enter') {
+  } else if(letter === 'Enter') {
     addSymbolInTextarea = '\r\n';
     //change Big or Small Letters
   } else if(letter === 'Shift') {
@@ -84,6 +80,14 @@ function addLetterInTextareaField(letter) {
     //change Big or Small Letters
   } else if(letter === 'Ctrl') {
     //change Big or Small Letters
+  } else if(letter === 'ArrowUp') {
+    addSymbolInTextarea = '\u25B2';
+  } else if(letter === 'ArrowDown') {
+    addSymbolInTextarea = '\u25B2';
+  } else if(letter === 'ArrowLeft') {
+    addSymbolInTextarea = '\u25C0';
+  } else if(letter === 'ArrowRight') {
+    addSymbolInTextarea = '\u25B6';
   } else if(letter === 'Win') {
     //change Big or Small Letters
   } else if(letter === 'Space') {
