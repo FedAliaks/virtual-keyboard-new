@@ -1,9 +1,4 @@
-import { createKeyboardLines } from "./createKeyboard";
-import {KEYBOARD_EN, KEYBOARD_EN_SHIFT, KEYBOARD_RU, KEYBOARD_RU_SHIFT} from './keyboards';
-
-
-function createPage() {
-
+export default function createPage() {
   const BODY = document.querySelector('body');
   BODY.classList.add('container');
   const h1 = document.createElement('h1');
@@ -24,9 +19,4 @@ function createPage() {
   const KEYBOARD_SECTION = document.createElement('div');
   KEYBOARD_SECTION.classList.add('keyboard');
   BODY.appendChild(KEYBOARD_SECTION);
-
-/*   createKeyboardLines(KEYBOARD_EN); */
-
 }
-
-export { createPage }

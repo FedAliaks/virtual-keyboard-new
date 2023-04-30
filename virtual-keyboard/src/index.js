@@ -3,7 +3,7 @@ import './style.scss';
 
 import {KEYBOARD_EN, KEYBOARD_EN_SHIFT, KEYBOARD_RU, KEYBOARD_RU_SHIFT} from './js/keyboards';
 import { createKeyboardLines } from './js/createKeyboard';
-import { createPage } from './js/createPage';
+import createPage from './js/createPage';
 const img = require('./assets/imageSea.jpg');
 
 let langKeyboard = 'EN';
