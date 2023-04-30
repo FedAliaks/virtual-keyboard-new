@@ -1,5 +1,7 @@
 import './style.scss';
-import { KEYBOARD_EN, KEYBOARD_EN_SHIFT, KEYBOARD_RU, KEYBOARD_RU_SHIFT } from './js/keyboards';
+import {
+  KEYBOARD_EN, KEYBOARD_EN_SHIFT, KEYBOARD_RU, KEYBOARD_RU_SHIFT,
+} from './js/keyboards';
 import { createKeyboardLines } from './js/createKeyboard';
 import createPage from './js/createPage';
 
@@ -11,7 +13,7 @@ window.addEventListener('unload', () => {
 });
 
 window.addEventListener('load', () => {
-  let lang = localStorage.getItem('langKey') || 'EN';
+  const lang = localStorage.getItem('langKey') || 'EN';
   langKeyboard = lang;
   if (langKeyboard === 'EN') {
     createKeyboardLines(KEYBOARD_EN);
@@ -22,35 +24,34 @@ window.addEventListener('load', () => {
 
 createPage();
 
-const KEYBOARD = document.querySelector('.keyboard');
-
-KEYBOARD.addEventListener('mousedown', (e) => {
-  const target = e.target;
-
-  if (e.target.classList.contains('button')) {
-    addInteractiveForButton(e);
-    addLetterInTextareaField(target.innerText);
-  }
-});
-
-KEYBOARD.addEventListener('mouseup', (e) => {
-  const targetContent = e.target.innerText;
-
-  if (targetContent !== 'CapsLock') {
-    addInteractiveForButton(e);
-  }
-
-  if (targetContent === 'Shift') {
-    changeSizeButtonInKeyboard(targetContent);
-  }
-});
-
 function addInteractiveForButton(e) {
   const target = e.target;
 
   if (target.classList.contains('button')) {
     target.classList.toggle('button_active');
   }
+}
+
+function changeSizeButtonInKeyboard(btnText) {
+  let alphabet = '';
+  if (langKeyboard === 'EN') {
+    sizeLetter === 'small' ? alphabet = KEYBOARD_EN_SHIFT : alphabet = KEYBOARD_EN;
+  } else {
+    sizeLetter === 'small' ? alphabet = KEYBOARD_RU_SHIFT : alphabet = KEYBOARD_RU;
+  }
+
+  sizeLetter === 'small' ? sizeLetter = 'big' : sizeLetter = 'small';
+  createKeyboardLines(alphabet, btnText);
+}
+
+function deleteNextLetter() {
+  const TEXTAREA = document.querySelector('.textarea');
+
+  const stringInTextarea = TEXTAREA.value;
+  const position = TEXTAREA.selectionStart;
+
+  const content = stringInTextarea.slice(0, position) + stringInTextarea.slice(position + 1);
+  TEXTAREA.value = content;
 }
 
 function addLetterInTextareaField(letter) {
@@ -98,55 +99,36 @@ function addLetterInTextareaField(letter) {
   TEXTAREA.value = content + addSymbolInTextarea;
 }
 
-function changeSizeButtonInKeyboard(btnText) {
-  let alphabet = '';
-  if (langKeyboard === 'EN') {
-    sizeLetter === 'small' ? alphabet = KEYBOARD_EN_SHIFT : alphabet = KEYBOARD_EN;
-  } else {
-    sizeLetter === 'small' ? alphabet = KEYBOARD_RU_SHIFT : alphabet = KEYBOARD_RU;
+const KEYBOARD = document.querySelector('.keyboard');
+
+KEYBOARD.addEventListener('mousedown', (e) => {
+  const target = e.target;
+
+  if (e.target.classList.contains('button')) {
+    addInteractiveForButton(e);
+    addLetterInTextareaField(target.innerText);
+  }
+});
+
+KEYBOARD.addEventListener('mouseup', (e) => {
+  const targetContent = e.target.innerText;
+
+  if (targetContent !== 'CapsLock') {
+    addInteractiveForButton(e);
   }
 
-  sizeLetter === 'small' ? sizeLetter = 'big' : sizeLetter = 'small';
-  createKeyboardLines(alphabet, btnText);
-}
+  if (targetContent === 'Shift') {
+    changeSizeButtonInKeyboard(targetContent);
+  }
+});
 
-function deleteNextLetter() {
-  const TEXTAREA = document.querySelector('.textarea');
 
-  const stringInTextarea = TEXTAREA.value;
-  const position = TEXTAREA.selectionStart;
 
-  const content = stringInTextarea.slice(0, position) + stringInTextarea.slice(position + 1);
-}
+
 
 // keyboard event
 const changeLanguage = ['Shift', 'Alt'];
 const pressed = new Set();
-
-document.addEventListener('keydown', (e) => {
-  pressed.add(e.key);
-
-  const btn = e.key === 'Control' ? 'Ctrl' : e.key;
-
-  addInteractiveAfterKeyboardPress(btn);
-  addLetterInTextareaField(btn);
-
-  checkChangeLanguage();
-});
-
-document.addEventListener('keyup', (e) => {
-  const btn = e.key === 'Control' ? 'Ctrl' : e.key;
-
-  if (btn !== 'CapsLock') {
-    removeInteractiveAfterKeyboardPress(btn);
-  }
-
-  if (btn === 'Shift') {
-    changeSizeButtonInKeyboard(btn);
-  }
-
-  pressed.delete(e.key);
-});
 
 function addInteractiveAfterKeyboardPress(button) {
   let temp = button;
@@ -214,4 +196,29 @@ function checkChangeLanguage() {
   langKeyboard === 'EN' ? langKeyboard = 'RU' : langKeyboard = 'EN';
 }
 
-export { sizeLetter };
+document.addEventListener('keydown', (e) => {
+  pressed.add(e.key);
+
+  const btn = e.key === 'Control' ? 'Ctrl' : e.key;
+
+  addInteractiveAfterKeyboardPress(btn);
+  addLetterInTextareaField(btn);
+
+  checkChangeLanguage();
+});
+
+document.addEventListener('keyup', (e) => {
+  const btn = e.key === 'Control' ? 'Ctrl' : e.key;
+
+  if (btn !== 'CapsLock') {
+    removeInteractiveAfterKeyboardPress(btn);
+  }
+
+  if (btn === 'Shift') {
+    changeSizeButtonInKeyboard(btn);
+  }
+
+  pressed.delete(e.key);
+});
+
+export default { sizeLetter };

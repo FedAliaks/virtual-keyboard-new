@@ -1,4 +1,4 @@
-import { sizeLetter } from '../index';
+import sizeLetter from '../index';
 
 export class Button {
   constructor(symbol) {
