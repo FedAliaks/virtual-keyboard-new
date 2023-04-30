@@ -15,8 +15,16 @@ window.addEventListener('unload', (e) => {
 })
 
 window.addEventListener('load', (e) => {
-  let lang = localStorage.getItem('langKey');
+  let lang = localStorage.getItem('langKey') || 'EN';
   console.log(lang);
+  langKeyboard = lang;
+  if(langKeyboard === 'EN') {
+    console.log('english');
+    createKeyboardLines(KEYBOARD_EN);
+  } else {
+    console.log('russian');
+    createKeyboardLines(KEYBOARD_RU);
+  }
 })
 
 

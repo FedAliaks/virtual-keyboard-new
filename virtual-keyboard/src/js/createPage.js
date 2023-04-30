@@ -25,7 +25,7 @@ function createPage() {
   KEYBOARD_SECTION.classList.add('keyboard');
   BODY.appendChild(KEYBOARD_SECTION);
 
-  createKeyboardLines(KEYBOARD_EN);
+/*   createKeyboardLines(KEYBOARD_EN); */
 
 }
 
