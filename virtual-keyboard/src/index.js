@@ -10,6 +10,16 @@ let langKeyboard = 'EN';
 let sizeLetter = 'small';
 
 
+window.addEventListener('unload', (e) => {
+  localStorage.setItem('langKey', langKeyboard);
+})
+
+window.addEventListener('load', (e) => {
+  let lang = localStorage.getItem('langKey');
+  console.log(lang);
+})
+
+
 createPage();
 
 
@@ -153,7 +163,7 @@ document.addEventListener('keyup', (e) => {
   const btn = e.key === 'Control' ? 'Ctrl' : e.key;
 
   if(btn !== "CapsLock") {
-    addInteractiveAfterKeyboardPress(btn);
+    removeInteractiveAfterKeyboardPress(btn);
   }
 
   if(btn === 'Shift') {
@@ -167,17 +177,43 @@ document.addEventListener('keyup', (e) => {
 
 
 function addInteractiveAfterKeyboardPress(button) {
-/*   console.log(1234); */
+  console.log('addInteractiveAfterKeyboardPress');
+  
   const BUTTONS_ON_VIRTUAL_KEYBOARD = document.querySelectorAll('.button');
 
   BUTTONS_ON_VIRTUAL_KEYBOARD.forEach(item => {
     if(item.innerText === button) {
+      if(button === 'CapsLock') {
+        item.classList.toggle('button_active');
+      } else {
+        item.classList.add('button_active');
+      }
 /*       console.log(5) */
-      item.classList.toggle('button_active');
+
+
+      
     }
   })
 
 }
+
+
+function removeInteractiveAfterKeyboardPress(button) {
+  /*   console.log(1234); */
+    const BUTTONS_ON_VIRTUAL_KEYBOARD = document.querySelectorAll('.button');
+  
+    BUTTONS_ON_VIRTUAL_KEYBOARD.forEach(item => {
+      if(item.innerText === button) {
+  /*       console.log(5) */
+        item.classList.remove('button_active');
+      }
+    })
+  
+  }
+
+
+
+
 
 
 function checkChangeLanguage() {
