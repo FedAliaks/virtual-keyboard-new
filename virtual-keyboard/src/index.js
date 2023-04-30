@@ -1,27 +1,24 @@
 import './style.scss';
-import {KEYBOARD_EN, KEYBOARD_EN_SHIFT, KEYBOARD_RU, KEYBOARD_RU_SHIFT} from './js/keyboards';
+import { KEYBOARD_EN, KEYBOARD_EN_SHIFT, KEYBOARD_RU, KEYBOARD_RU_SHIFT } from './js/keyboards';
 import { createKeyboardLines } from './js/createKeyboard';
 import createPage from './js/createPage';
 
 let langKeyboard = 'EN';
 let sizeLetter = 'small';
 
-window.addEventListener('unload', (e) => {
+window.addEventListener('unload', () => {
   localStorage.setItem('langKey', langKeyboard);
-})
+});
 
-window.addEventListener('load', (e) => {
+window.addEventListener('load', () => {
   let lang = localStorage.getItem('langKey') || 'EN';
-/*   console.log(lang); */
   langKeyboard = lang;
   if (langKeyboard === 'EN') {
-/*     console.log('english'); */
     createKeyboardLines(KEYBOARD_EN);
   } else {
-/*     console.log('russian'); */
     createKeyboardLines(KEYBOARD_RU);
   }
-})
+});
 
 createPage();
 
@@ -33,21 +30,20 @@ KEYBOARD.addEventListener('mousedown', (e) => {
   if (e.target.classList.contains('button')) {
     addInteractiveForButton(e);
     addLetterInTextareaField(target.innerText);
-
   }
-})
+});
 
 KEYBOARD.addEventListener('mouseup', (e) => {
   const targetContent = e.target.innerText;
 
-  if (targetContent !== "CapsLock") {
+  if (targetContent !== 'CapsLock') {
     addInteractiveForButton(e);
   }
 
   if (targetContent === 'Shift') {
     changeSizeButtonInKeyboard(targetContent);
   }
-})
+});
 
 function addInteractiveForButton(e) {
   const target = e.target;
@@ -63,23 +59,24 @@ function addLetterInTextareaField(letter) {
   let addSymbolInTextarea = '';
 
   if (letter === 'Tab') {
-    addSymbolInTextarea  = '    ';
+    addSymbolInTextarea = '    ';
   } else if (letter === 'Backspace') {
     content = content.slice(0, content.length - 1);
   } else if (letter === 'CapsLock') {
-      changeSizeButtonInKeyboard(letter);
+    changeSizeButtonInKeyboard(letter);
   } else if (letter === 'Control'
                 || letter === 'Meta'
-                || letter === 'Alt' ) {
+                || letter === 'Alt') {
+    // comment empty
 
   } else if (letter === 'Enter') {
     addSymbolInTextarea = '\r\n';
-    //change Big or Small Letters
+    // change Big or Small Letters
   } else if (letter === 'Shift') {
     changeSizeButtonInKeyboard(letter);
-    //change Big or Small Letters
+    // change Big or Small Letters
   } else if (letter === 'Ctrl') {
-    //change Big or Small Letters
+    // change Big or Small Letters
   } else if (letter === 'ArrowUp') {
     addSymbolInTextarea = '\u25B2';
   } else if (letter === 'ArrowDown') {
@@ -89,10 +86,10 @@ function addLetterInTextareaField(letter) {
   } else if (letter === 'ArrowRight') {
     addSymbolInTextarea = '\u25B6';
   } else if (letter === 'Win') {
-    //change Big or Small Letters
+    // change Big or Small Letters
   } else if (letter === 'Space') {
     addSymbolInTextarea = ' ';
-  } else if (letter === "Del") {
+  } else if (letter === 'Del') {
     deleteNextLetter();
   } else {
     addSymbolInTextarea = letter;
@@ -100,7 +97,6 @@ function addLetterInTextareaField(letter) {
 
   TEXTAREA.value = content + addSymbolInTextarea;
 }
-
 
 function changeSizeButtonInKeyboard(btnText) {
   let alphabet = '';
@@ -116,19 +112,16 @@ function changeSizeButtonInKeyboard(btnText) {
 
 function deleteNextLetter() {
   const TEXTAREA = document.querySelector('.textarea');
-  console.log(TEXTAREA.value);
 
-  let stringInTextarea = TEXTAREA.value;
+  const stringInTextarea = TEXTAREA.value;
   const position = TEXTAREA.selectionStart;
 
   const content = stringInTextarea.slice(0, position) + stringInTextarea.slice(position + 1);
-  console.log(content);
 }
 
-//keyboard event
-
+// keyboard event
 const changeLanguage = ['Shift', 'Alt'];
-const pressed= new Set();
+const pressed = new Set();
 
 document.addEventListener('keydown', (e) => {
   pressed.add(e.key);
@@ -144,7 +137,7 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('keyup', (e) => {
   const btn = e.key === 'Control' ? 'Ctrl' : e.key;
 
-  if (btn !== "CapsLock") {
+  if (btn !== 'CapsLock') {
     removeInteractiveAfterKeyboardPress(btn);
   }
 
@@ -153,18 +146,15 @@ document.addEventListener('keyup', (e) => {
   }
 
   pressed.delete(e.key);
-
 });
 
-
 function addInteractiveAfterKeyboardPress(button) {
-
   let temp = button;
 
   if (button === 'Meta') {
     temp = 'Win';
   } else if (button === ' ') {
-    temp = 'Space'
+    temp = 'Space';
   } else if (button === 'ArrowLeft') {
     temp = '\u25C0';
   } else if (button === 'ArrowUp') {
@@ -177,7 +167,7 @@ function addInteractiveAfterKeyboardPress(button) {
 
   const BUTTONS_ON_VIRTUAL_KEYBOARD = document.querySelectorAll('.button');
 
-  BUTTONS_ON_VIRTUAL_KEYBOARD.forEach(item => {
+  BUTTONS_ON_VIRTUAL_KEYBOARD.forEach((item) => {
     if (item.innerText === temp) {
       if (button === 'CapsLock') {
         item.classList.toggle('button_active');
@@ -185,38 +175,37 @@ function addInteractiveAfterKeyboardPress(button) {
         item.classList.add('button_active');
       }
     }
-  })
+  });
 }
 
-
 function removeInteractiveAfterKeyboardPress(button) {
-    let temp = button;
+  let temp = button;
 
-    if (button === 'Meta') {
-      temp = 'Win';
-    } else if (button === ' ') {
-      temp = 'Space'
-    } else if (button === 'ArrowLeft') {
-      temp = '\u25C0';
-    } else if (button === 'ArrowUp') {
-      temp = '\u25B2';
-    } else if (button === 'ArrowDown') {
-      temp = '\u25BC';
-    } else if (button === 'ArrowRight') {
-      temp = '\u25B6';
-    }
-    
-    const BUTTONS_ON_VIRTUAL_KEYBOARD = document.querySelectorAll('.button');
-  
-    BUTTONS_ON_VIRTUAL_KEYBOARD.forEach(item => {
-      if (item.innerText === temp) {
-        item.classList.remove('button_active');
-      }
-    });
+  if (button === 'Meta') {
+    temp = 'Win';
+  } else if (button === ' ') {
+    temp = 'Space';
+  } else if (button === 'ArrowLeft') {
+    temp = '\u25C0';
+  } else if (button === 'ArrowUp') {
+    temp = '\u25B2';
+  } else if (button === 'ArrowDown') {
+    temp = '\u25BC';
+  } else if (button === 'ArrowRight') {
+    temp = '\u25B6';
   }
 
+  const BUTTONS_ON_VIRTUAL_KEYBOARD = document.querySelectorAll('.button');
+
+  BUTTONS_ON_VIRTUAL_KEYBOARD.forEach((item) => {
+    if (item.innerText === temp) {
+      item.classList.remove('button_active');
+    }
+  });
+}
+
 function checkChangeLanguage() {
-  for(let pressKey of changeLanguage) {
+  for (const pressKey of changeLanguage) {
     if (!pressed.has(pressKey)) {
       return;
     }
@@ -225,29 +214,4 @@ function checkChangeLanguage() {
   langKeyboard === 'EN' ? langKeyboard = 'RU' : langKeyboard = 'EN';
 }
 
-
-
-
-
-
-
-
-
-
-
-
-export { sizeLetter }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export { sizeLetter };
