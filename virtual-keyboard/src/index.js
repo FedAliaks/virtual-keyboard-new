@@ -25,10 +25,8 @@ window.addEventListener('load', () => {
 createPage();
 
 function addInteractiveForButton(e) {
-  const target = e.target;
-
-  if (target.classList.contains('button')) {
-    target.classList.toggle('button_active');
+  if (e.target.classList.contains('button')) {
+    e.target.classList.toggle('button_active');
   }
 }
 
@@ -102,11 +100,9 @@ function addLetterInTextareaField(letter) {
 const KEYBOARD = document.querySelector('.keyboard');
 
 KEYBOARD.addEventListener('mousedown', (e) => {
-  const target = e.target;
-
   if (e.target.classList.contains('button')) {
     addInteractiveForButton(e);
-    addLetterInTextareaField(target.innerText);
+    addLetterInTextareaField(e.target.innerText);
   }
 });
 
@@ -121,10 +117,6 @@ KEYBOARD.addEventListener('mouseup', (e) => {
     changeSizeButtonInKeyboard(targetContent);
   }
 });
-
-
-
-
 
 // keyboard event
 const changeLanguage = ['Shift', 'Alt'];

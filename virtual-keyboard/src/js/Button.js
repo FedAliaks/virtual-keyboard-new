@@ -1,6 +1,6 @@
 import sizeLetter from '../index';
 
-export class Button {
+export default class Button {
   constructor(symbol) {
     this.innerTextButton = symbol;
   }
