@@ -16,13 +16,13 @@ window.addEventListener('unload', (e) => {
 
 window.addEventListener('load', (e) => {
   let lang = localStorage.getItem('langKey') || 'EN';
-  console.log(lang);
+/*   console.log(lang); */
   langKeyboard = lang;
   if(langKeyboard === 'EN') {
-    console.log('english');
+/*     console.log('english'); */
     createKeyboardLines(KEYBOARD_EN);
   } else {
-    console.log('russian');
+/*     console.log('russian'); */
     createKeyboardLines(KEYBOARD_RU);
   }
 })
@@ -186,11 +186,28 @@ document.addEventListener('keyup', (e) => {
 
 function addInteractiveAfterKeyboardPress(button) {
   console.log('addInteractiveAfterKeyboardPress');
+
+  let temp = button;
+
+
+  if(button === 'Meta') {
+    temp = 'Win';
+  } else if(button === ' ') {
+    temp = 'Space'
+  } else if(button === 'ArrowLeft') {
+    temp = '\u25C0';
+  } else if(button === 'ArrowUp') {
+    temp = '\u25B2';
+  } else if(button === 'ArrowDown') {
+    temp = '\u25BC';
+  } else if(button === 'ArrowRight') {
+    temp = '\u25B6';
+  }
   
   const BUTTONS_ON_VIRTUAL_KEYBOARD = document.querySelectorAll('.button');
 
   BUTTONS_ON_VIRTUAL_KEYBOARD.forEach(item => {
-    if(item.innerText === button) {
+    if(item.innerText === temp) {
       if(button === 'CapsLock') {
         item.classList.toggle('button_active');
       } else {
@@ -198,8 +215,6 @@ function addInteractiveAfterKeyboardPress(button) {
       }
 /*       console.log(5) */
 
-
-      
     }
   })
 
@@ -207,11 +222,34 @@ function addInteractiveAfterKeyboardPress(button) {
 
 
 function removeInteractiveAfterKeyboardPress(button) {
-  /*   console.log(1234); */
+    console.log('remove');
+
+    let temp = button;
+
+
+    if(button === 'Meta') {
+      temp = 'Win';
+    } else if(button === ' ') {
+      temp = 'Space'
+    } else if(button === 'ArrowLeft') {
+      temp = '\u25C0';
+    } else if(button === 'ArrowUp') {
+      temp = '\u25B2';
+    } else if(button === 'ArrowDown') {
+      temp = '\u25BC';
+    } else if(button === 'ArrowRight') {
+      temp = '\u25B6';
+    }
+    
+
+
+
+
+
     const BUTTONS_ON_VIRTUAL_KEYBOARD = document.querySelectorAll('.button');
   
     BUTTONS_ON_VIRTUAL_KEYBOARD.forEach(item => {
-      if(item.innerText === button) {
+      if(item.innerText === temp) {
   /*       console.log(5) */
         item.classList.remove('button_active');
       }
