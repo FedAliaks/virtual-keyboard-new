@@ -138,6 +138,20 @@ function changeSizeButtonInKeyboard(btnText) {
 
 function deleteNextLetter() {
   console.log(123);
+  const TEXTAREA = document.querySelector('.textarea');
+  console.log(TEXTAREA.value);
+
+  let stringInTextarea = TEXTAREA.value;
+  const position = TEXTAREA.selectionStart;
+
+  const content = stringInTextarea.slice(0, position) + stringInTextarea.slice(position + 1);
+  console.log(content);
+
+
+  
+
+
+
 
 }
 
@@ -156,7 +170,7 @@ document.addEventListener('keydown', (e) => {
   console.log(pressed); */
   
   const btn = e.key === 'Control' ? 'Ctrl' : e.key;
-  console.log(btn)
+/*   console.log(btn) */
   addInteractiveAfterKeyboardPress(btn);
   addLetterInTextareaField(btn);
 
@@ -185,7 +199,7 @@ document.addEventListener('keyup', (e) => {
 
 
 function addInteractiveAfterKeyboardPress(button) {
-  console.log('addInteractiveAfterKeyboardPress');
+/*   console.log('addInteractiveAfterKeyboardPress'); */
 
   let temp = button;
 
@@ -222,7 +236,7 @@ function addInteractiveAfterKeyboardPress(button) {
 
 
 function removeInteractiveAfterKeyboardPress(button) {
-    console.log('remove');
+/*     console.log('remove'); */
 
     let temp = button;
 
