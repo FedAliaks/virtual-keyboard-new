@@ -33,12 +33,23 @@ function addInteractiveForButton(e) {
 function changeSizeButtonInKeyboard(btnText) {
   let alphabet = '';
   if (langKeyboard === 'EN') {
-    sizeLetter === 'small' ? alphabet = KEYBOARD_EN_SHIFT : alphabet = KEYBOARD_EN;
+    if (sizeLetter === 'small') {
+      alphabet = KEYBOARD_EN_SHIFT;
+    } else {
+      alphabet = KEYBOARD_EN;
+    }
+  } else if (sizeLetter === 'small') {
+    alphabet = KEYBOARD_RU_SHIFT;
   } else {
-    sizeLetter === 'small' ? alphabet = KEYBOARD_RU_SHIFT : alphabet = KEYBOARD_RU;
+    alphabet = KEYBOARD_RU;
   }
 
-  sizeLetter === 'small' ? sizeLetter = 'big' : sizeLetter = 'small';
+  if (sizeLetter === 'small') {
+    sizeLetter = 'big';
+  } else {
+    sizeLetter = 'small';
+  }
+
   createKeyboardLines(alphabet, btnText);
 }
 
@@ -179,13 +190,17 @@ function removeInteractiveAfterKeyboardPress(button) {
 }
 
 function checkChangeLanguage() {
-  for (const pressKey of changeLanguage) {
-    if (!pressed.has(pressKey)) {
+  for (let i = 0; i < changeLanguage.length; i += 1) {
+    if (!pressed.has(changeLanguage[i])) {
       return;
     }
   }
 
-  langKeyboard === 'EN' ? langKeyboard = 'RU' : langKeyboard = 'EN';
+  if (langKeyboard === 'EN') {
+    langKeyboard = 'RU';
+  } else {
+    langKeyboard = 'EN';
+  }
 }
 
 document.addEventListener('keydown', (e) => {
