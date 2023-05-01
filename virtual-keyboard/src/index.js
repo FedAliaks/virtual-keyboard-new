@@ -81,7 +81,6 @@ function addLetterInTextareaField(letter) {
   } else if (letter === 'Control'
                 || letter === 'Meta'
                 || letter === 'Alt') {
-    // comment empty
 
   } else if (letter === 'Enter') {
     addSymbolInTextarea = '\r\n';
