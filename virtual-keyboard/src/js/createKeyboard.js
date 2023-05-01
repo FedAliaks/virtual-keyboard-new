@@ -17,4 +17,14 @@ function createKeyboardLines(language, btnText, sizeLetter) {
   });
 }
 
-export { createKeyboardLines };
+function deleteNextLetter() {
+  const TEXTAREA = document.querySelector('.textarea');
+
+  const stringInTextarea = TEXTAREA.value;
+  const position = TEXTAREA.selectionStart;
+
+  const content = stringInTextarea.slice(0, position) + stringInTextarea.slice(position + 1);
+  TEXTAREA.value = content;
+}
+
+export { createKeyboardLines, deleteNextLetter };

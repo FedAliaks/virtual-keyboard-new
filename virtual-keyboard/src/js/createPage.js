@@ -21,6 +21,6 @@ export default function createPage() {
 
   const ELEMENT = document.createElement('div');
   ELEMENT.classList.add('title');
-  ELEMENT.innerText = `Для изменения языка используй сочетание клавиш Shift + Alt`;
+  ELEMENT.innerText = 'Для изменения языка используй сочетание клавиш Shift + Alt';
   BODY.appendChild(ELEMENT);
 }

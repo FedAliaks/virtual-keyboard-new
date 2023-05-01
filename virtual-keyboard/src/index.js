@@ -2,7 +2,7 @@ import './style.scss';
 import {
   KEYBOARD_EN, KEYBOARD_EN_SHIFT, KEYBOARD_RU, KEYBOARD_RU_SHIFT,
 } from './js/keyboards';
-import { createKeyboardLines } from './js/createKeyboard';
+import { createKeyboardLines, deleteNextLetter } from './js/createKeyboard';
 import createPage from './js/createPage';
 
 let langKeyboard = 'EN';
@@ -31,19 +31,7 @@ function addInteractiveForButton(e) {
     } else {
       e.target.classList.toggle('button_active');
     }
-
   }
-}
-
-function removeInteractiveForButton(e) {
-  if (e.target.classList.contains('button') && e.target.innerText !== 'CapsLock') {
-    e.target.classList.remove('button_active');
-  }
-
-  if(e.target.innerText === 'Shift') {
-    changeSizeButtonInKeyboard(e.target.innerText)
-  }
-
 }
 
 function changeSizeButtonInKeyboard(btnText) {
@@ -69,19 +57,18 @@ function changeSizeButtonInKeyboard(btnText) {
   createKeyboardLines(alphabet, btnText, sizeLetter);
 }
 
-function deleteNextLetter() {
-  const TEXTAREA = document.querySelector('.textarea');
+function removeInteractiveForButton(e) {
+  if (e.target.classList.contains('button') && e.target.innerText !== 'CapsLock') {
+    e.target.classList.remove('button_active');
+  }
 
-  const stringInTextarea = TEXTAREA.value;
-  const position = TEXTAREA.selectionStart;
-
-  const content = stringInTextarea.slice(0, position) + stringInTextarea.slice(position + 1);
-  TEXTAREA.value = content;
+  if (e.target.innerText === 'Shift') {
+    changeSizeButtonInKeyboard(e.target.innerText);
+  }
 }
 
 function addLetterInTextareaField(letter) {
   const TEXTAREA = document.querySelector('.textarea');
-  TEXTAREA.focus();
   let content = TEXTAREA.value;
   let addSymbolInTextarea = '';
 
@@ -145,7 +132,6 @@ KEYBOARD.addEventListener('mouseup', (e) => {
     changeSizeButtonInKeyboard(targetContent);
   }
 });
-
 
 // keyboard event
 const changeLanguage = ['Shift', 'Alt'];
@@ -227,7 +213,7 @@ document.addEventListener('keydown', (e) => {
   const btn = e.key === 'Control' ? 'Ctrl' : e.key;
 
   addInteractiveAfterKeyboardPress(btn);
-  addLetterInTextareaField(btn);
+  addLetterInTextareaField(btn, 'keyboard');
 
   checkChangeLanguage();
 });
@@ -245,22 +231,5 @@ document.addEventListener('keyup', (e) => {
 
   pressed.delete(e.key);
 });
-
-
-
-
-// work width Textarea
-const TEXTAREA_FIELD = document.querySelector('.textarea');
-
-TEXTAREA_FIELD.addEventListener('focus', () => {
-  console.log('focus')
-})
-
-TEXTAREA_FIELD.addEventListener('blur', () => {
-  console.log('blur')
-})
-
-
-
 
 export default { sizeLetter };

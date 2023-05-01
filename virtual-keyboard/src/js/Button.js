@@ -6,7 +6,7 @@ export default class Button {
     this.sizeLetter = sizeLetter;
   }
 
-  createButton(btnText, sizeLetter) {
+  createButton(btnText) {
     const div = document.createElement('div');
     div.className = 'button';
     if (this.innerTextButton.length > 1) {
