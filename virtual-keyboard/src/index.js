@@ -26,8 +26,20 @@ createPage();
 
 function addInteractiveForButton(e) {
   if (e.target.classList.contains('button')) {
-    e.target.classList.toggle('button_active');
+    if (e.target.innerText !== 'CapsLock') {
+      e.target.classList.add('button_active');
+    } else {
+      e.target.classList.toggle('button_active');
+    }
+    
   }
+}
+
+function removeInteractiveForButton(e) {
+  if (e.target.classList.contains('button') && e.target.innerText !== 'CapsLock') {
+    e.target.classList.remove('button_active');
+  }
+
 }
 
 function changeSizeButtonInKeyboard(btnText) {
@@ -121,13 +133,27 @@ KEYBOARD.addEventListener('mouseup', (e) => {
   const targetContent = e.target.innerText;
 
   if (targetContent !== 'CapsLock') {
-    addInteractiveForButton(e);
+    removeInteractiveForButton(e);
   }
 
   if (targetContent === 'Shift') {
     changeSizeButtonInKeyboard(targetContent);
   }
 });
+
+
+KEYBOARD.addEventListener('mouseout', (e) => {
+  const targetContent = e.target.innerText;
+
+  if (targetContent !== 'CapsLock') {
+    removeInteractiveForButton(e);
+  }
+
+  if (targetContent === 'Shift') {
+    changeSizeButtonInKeyboard(targetContent);
+  }
+
+})
 
 // keyboard event
 const changeLanguage = ['Shift', 'Alt'];
