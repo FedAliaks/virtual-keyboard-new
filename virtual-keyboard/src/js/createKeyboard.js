@@ -1,6 +1,6 @@
 import Button from './Button';
 
-function createKeyboardLines(language, btnText) {
+function createKeyboardLines(language, btnText, sizeLetter) {
   const KEYBOARD_SECTION = document.querySelector('.keyboard');
   KEYBOARD_SECTION.innerHTML = '';
 
@@ -8,7 +8,7 @@ function createKeyboardLines(language, btnText) {
     const line = document.createElement('div');
     line.className = 'keyboard-line';
     keyboardLine.forEach((item) => {
-      const btn = new Button(item);
+      const btn = new Button(item, sizeLetter);
       const btnElement = btn.createButton(btnText);
       line.append(btnElement);
     });

@@ -31,13 +31,17 @@ function addInteractiveForButton(e) {
     } else {
       e.target.classList.toggle('button_active');
     }
-    
+
   }
 }
 
 function removeInteractiveForButton(e) {
   if (e.target.classList.contains('button') && e.target.innerText !== 'CapsLock') {
     e.target.classList.remove('button_active');
+  }
+
+  if(e.target.innerText === 'Shift') {
+    changeSizeButtonInKeyboard(e.target.innerText)
   }
 
 }
@@ -62,7 +66,12 @@ function changeSizeButtonInKeyboard(btnText) {
     sizeLetter = 'small';
   }
 
-  createKeyboardLines(alphabet, btnText);
+  console.log('changesizebuttonInKeyboard');
+  console.log(alphabet);
+  console.log(btnText);
+  console.log(sizeLetter);
+
+  createKeyboardLines(alphabet, btnText, sizeLetter);
 }
 
 function deleteNextLetter() {
@@ -136,24 +145,25 @@ KEYBOARD.addEventListener('mouseup', (e) => {
     removeInteractiveForButton(e);
   }
 
-  if (targetContent === 'Shift') {
+  if (targetContent === 'Shift' && e.target.classList.contains('button_active')) {
     changeSizeButtonInKeyboard(targetContent);
   }
 });
 
 
-KEYBOARD.addEventListener('mouseout', (e) => {
+/* KEYBOARD.addEventListener('mouseout', (e) => {
   const targetContent = e.target.innerText;
 
-  if (targetContent !== 'CapsLock') {
+  if (targetContent !== 'CapsLock' || targetContent !== 'Shift') {
     removeInteractiveForButton(e);
   }
 
-  if (targetContent === 'Shift') {
+  if (targetContent === 'Shift' && e.target.classList.contains('button_active')) {
+    console.log('ura')
     changeSizeButtonInKeyboard(targetContent);
   }
 
-})
+}) */
 
 // keyboard event
 const changeLanguage = ['Shift', 'Alt'];
