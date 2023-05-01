@@ -81,6 +81,7 @@ function deleteNextLetter() {
 
 function addLetterInTextareaField(letter) {
   const TEXTAREA = document.querySelector('.textarea');
+  TEXTAREA.focus();
   let content = TEXTAREA.value;
   let addSymbolInTextarea = '';
 
@@ -244,5 +245,22 @@ document.addEventListener('keyup', (e) => {
 
   pressed.delete(e.key);
 });
+
+
+
+
+// work width Textarea
+const TEXTAREA_FIELD = document.querySelector('.textarea');
+
+TEXTAREA_FIELD.addEventListener('focus', () => {
+  console.log('focus')
+})
+
+TEXTAREA_FIELD.addEventListener('blur', () => {
+  console.log('blur')
+})
+
+
+
 
 export default { sizeLetter };

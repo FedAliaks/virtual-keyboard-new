@@ -18,4 +18,9 @@ export default function createPage() {
   const KEYBOARD_SECTION = document.createElement('div');
   KEYBOARD_SECTION.classList.add('keyboard');
   BODY.appendChild(KEYBOARD_SECTION);
+
+  const ELEMENT = document.createElement('div');
+  ELEMENT.classList.add('title');
+  ELEMENT.innerText = `Для изменения языка используй сочетание клавиш Shift + Alt`;
+  BODY.appendChild(ELEMENT);
 }
