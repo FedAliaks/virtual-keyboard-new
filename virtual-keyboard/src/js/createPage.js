@@ -12,7 +12,6 @@ export default function createPage() {
   TEXTAREA.setAttribute('id', 'textarea');
   TEXTAREA.setAttribute('cols', '50');
   TEXTAREA.setAttribute('rows', '10');
-  TEXTAREA.setAttribute('placeholder', '11231231223');
 
   BODY.appendChild(TEXTAREA);
 

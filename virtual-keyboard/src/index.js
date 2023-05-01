@@ -66,11 +66,6 @@ function changeSizeButtonInKeyboard(btnText) {
     sizeLetter = 'small';
   }
 
-  console.log('changesizebuttonInKeyboard');
-  console.log(alphabet);
-  console.log(btnText);
-  console.log(sizeLetter);
-
   createKeyboardLines(alphabet, btnText, sizeLetter);
 }
 
@@ -150,20 +145,6 @@ KEYBOARD.addEventListener('mouseup', (e) => {
   }
 });
 
-
-/* KEYBOARD.addEventListener('mouseout', (e) => {
-  const targetContent = e.target.innerText;
-
-  if (targetContent !== 'CapsLock' || targetContent !== 'Shift') {
-    removeInteractiveForButton(e);
-  }
-
-  if (targetContent === 'Shift' && e.target.classList.contains('button_active')) {
-    console.log('ura')
-    changeSizeButtonInKeyboard(targetContent);
-  }
-
-}) */
 
 // keyboard event
 const changeLanguage = ['Shift', 'Alt'];
