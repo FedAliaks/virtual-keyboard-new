@@ -116,6 +116,13 @@ const KEYBOARD = document.querySelector('.keyboard');
 
 KEYBOARD.addEventListener('mousedown', (e) => {
   if (e.target.classList.contains('button')) {
+    const KEYBOARDS = document.querySelectorAll('.button');
+    KEYBOARDS.forEach((item) => {
+      if (item.innerText !== 'CapsLock') {
+        item.classList.remove('button_active');
+      }
+    });
+
     addInteractiveForButton(e);
     addLetterInTextareaField(e.target.innerText);
   }
@@ -157,6 +164,9 @@ function addInteractiveAfterKeyboardPress(button) {
   const BUTTONS_ON_VIRTUAL_KEYBOARD = document.querySelectorAll('.button');
 
   BUTTONS_ON_VIRTUAL_KEYBOARD.forEach((item) => {
+    if (item.innerText !== 'CapsLock') {
+      item.classList.remove('button_active');
+    }
     if (item.innerText === temp) {
       if (button === 'CapsLock') {
         item.classList.toggle('button_active');
